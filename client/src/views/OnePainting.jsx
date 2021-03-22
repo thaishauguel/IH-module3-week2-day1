@@ -8,25 +8,36 @@ class OnePainting extends Component {
         onePainting: null
     }
     componentDidMount = () => {
+
+        if (this.props.id){
+            axios.get(`http://localhost:4000/api/paintings/${this.props.id}`)
+            .then((painting) => {
+                this.setState({ onePainting: painting.data })
+            })
+            .catch((err) => console.log(err))
+        
+        }
         // console.log(this.props.match)
-        axios.get(`http://localhost:4000/api/paintings/${this.props.match.params.id}`)
+        else {
+            axios.get(`http://localhost:4000/api/paintings/${this.props.match.params.id}`)
         .then((painting) => {
             this.setState({ onePainting: painting.data })
         })
         .catch((err) => console.log(err))
+        }
     }
     
     render() {
         // console.log('coucou')
         if (!this.state.onePainting) { return <div>Loading...</div> }
         return (
-            <div>
+            <div style={{width: 400, margin: "auto"}}>
                 <h1>{this.state.onePainting.title}</h1>
                 <h2>{this.state.onePainting.artist}</h2>
                 <p>{this.state.onePainting.yearOfDate}</p>
                 <p>{this.state.onePainting.gallery}</p>
 
-                <img src={this.state.onePainting.image} alt="" />
+                <img style={{width: 150}}src={this.state.onePainting.image} alt="" />
             </div>
         )
     }

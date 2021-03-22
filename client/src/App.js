@@ -9,6 +9,8 @@ import List from './views/List';
 import Form from './views/Form';
 import OnePainting from './views/OnePainting';
 import NotFound from './views/NotFound';
+import Update from './views/Update';
+
 
 
 class App extends React.Component {
@@ -29,6 +31,7 @@ class App extends React.Component {
         <Switch>
         <Route exact path='/' component={Home}/>
         <Route exact path='/paintings/list' component={List}/>
+        <Route  exact path='/paintings/update/:id' component={Update}/>
         <Route 
         exact path='/paintings/create' 
         render={() => {
